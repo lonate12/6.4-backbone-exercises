@@ -5,6 +5,9 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 // Import Bootstrap
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 
+// Colors
+$black: black;
+$blue: #80D4F5;
 
 *,
 *::before,
@@ -14,4 +17,13 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 
 img {
   max-width: 100%;
+}
+
+body {
+  background-color: $black;
+}
+
+.main-header, .exercise-description {
+  text-align: center;
+  color: $blue;
 }
