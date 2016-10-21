@@ -16,7 +16,7 @@ var HomeFormView = Backbone.View.extend({
   postBlogToServ: function(e){
     e.preventDefault();
     var newBlogPost = {
-      author: $('#authoer').val(),
+      author: $('#author').val(),
       title: $('#blog-title').val(),
       content: $('#blog-content').val()
     };

@@ -1,6 +1,7 @@
 var $ = require('jquery');
 var Backbone = require('backbone');
 var blogItemTemplate = require('../../templates/blog-item.hbs');
+var activeBlogTemplate = require('../../templates/active-blog-display.hbs');
 
 var BlogListView = Backbone.View.extend({
   tagName: 'ul',
@@ -9,7 +10,6 @@ var BlogListView = Backbone.View.extend({
     this.listenTo(this.collection, 'add', this.addBlogItem);
   },
   addBlogItem: function(blog){
-    console.log('Blog added');
     var newBlogItem = new BlogItemView({model: blog});
     this.$el.append(newBlogItem.render().el);
   }
@@ -19,22 +19,28 @@ var BlogItemView = Backbone.View.extend({
   tagName: 'li',
   className: 'blog-item',
   template: blogItemTemplate,
-  events: {
-    'click': 'makeActive'
-  },
+  render: function(){
+    var contextObject = this.model.toJSON();
+    this.$el.html(this.template(contextObject));
+
+    return this;
+  }
+});
+
+var MainDisplayView = Backbone.View.extend({
+  tagName: 'div',
+  className: 'active-blog-container',
+  template: activeBlogTemplate,
   render: function(){
     var contextObject = this.model.toJSON();
     this.$el.html(this.template(contextObject));
 
     return this;
   },
-  makeActive: function(e){
-    e.preventDefault();
-    console.log('makeActive has been triggered.');
-  }
 });
 
 module.exports = {
   BlogListView: BlogListView,
-  BlogItemView: BlogItemView
+  BlogItemView: BlogItemView,
+  MainDisplayView: MainDisplayView
 };
