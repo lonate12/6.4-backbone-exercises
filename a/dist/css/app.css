@@ -5817,7 +5817,7 @@ img {
 body {
   background-color: black; }
 
-.main-header, .exercise-description {
+h1, h2 {
   text-align: center;
   color: #80D4F5; }
 
