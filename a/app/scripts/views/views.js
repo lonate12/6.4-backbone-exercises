@@ -16,12 +16,14 @@ var HomeFormView = Backbone.View.extend({
   postBlogToServ: function(e){
     e.preventDefault();
     var newBlogPost = {
+      author: $('#authoer').val(),
       title: $('#blog-title').val(),
       content: $('#blog-content').val()
     };
 
     this.collection.create(newBlogPost);
 
+    $('#author').val('');
     $('#blog-title').val('');
     $('#blog-content').val('');
   }

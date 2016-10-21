@@ -15,7 +15,7 @@ var Blog = Backbone.Model.extend({
 
 var BlogCollection = Backbone.Collection.extend({
   model: Blog,
-  url: 'https://tiny-lasagna-server.herokuapp.com/collections/rene-blog-posts'
+  url: 'https://tiny-lasagna-server.herokuapp.com/collections/rene-exercise-c'
 });
 
 module.exports = {
@@ -38,9 +38,8 @@ var AppRouter = Backbone.Router.extend({
     this.collection = new models.BlogCollection();
   },
   getForm: function(){
-    console.log("GetForm function fired");
     var homeForm = new views.HomeFormView({collection: this.collection});
-  
+
     $('.app').html(homeForm.render().el);
   }
 });
@@ -64,18 +63,19 @@ var HomeFormView = Backbone.View.extend({
   },
   render: function(){
     this.$el.html(this.template());
-    // console.log('render function triggered');
     return this;
   },
   postBlogToServ: function(e){
     e.preventDefault();
     var newBlogPost = {
+      author: $('#authoer').val(),
       title: $('#blog-title').val(),
       content: $('#blog-content').val()
     };
 
     this.collection.create(newBlogPost);
 
+    $('#author').val('');
     $('#blog-title').val('');
     $('#blog-content').val('');
   }
@@ -90,7 +90,7 @@ module.exports = {
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h2>New Blog</h2>\n<div class=\"form-group col-md-6 col-md-offset-3\">\n  <label for=\"blog-title\">Blog Title</label>\n  <input type=\"text\" id=\"blog-title\" class=\"form-control\" name=\"blog-title\" value=\"\" placeholder=\"My Awesome Blog Title\">\n</div>\n<div class=\"form-group col-md-6 col-md-offset-3\">\n  <label for=\"blog-content\">Blog Away!</label>\n  <textarea id=\"blog-content\" class=\"form-control\" name=\"blog-content\" rows=\"8\" cols=\"40\" placeholder=\"My awesome blog is about...\"></textarea>\n  <button type=\"submit\" name=\"btn btn-default\">Create New Blog</button>\n</div>\n";
+    return "<h2>New Blog</h2>\n<div class=\"form-group col-md-6 col-md-offset-3\">\n  <label for=\"author\">Your Name</label>\n  <input type=\"text\" id=\"author\" class=\"form-control\" name=\"author\" value=\"\" placeholder=\"John Doe\">\n</div>\n<div class=\"form-group col-md-6 col-md-offset-3\">\n  <label for=\"blog-title\">Blog Title</label>\n  <input type=\"text\" id=\"blog-title\" class=\"form-control\" name=\"blog-title\" value=\"\" placeholder=\"My Awesome Blog Title\">\n</div>\n<div class=\"form-group col-md-6 col-md-offset-3\">\n  <label for=\"blog-content\">Blog Away!</label>\n  <textarea id=\"blog-content\" class=\"form-control\" name=\"blog-content\" rows=\"8\" cols=\"40\" placeholder=\"My awesome blog is about...\"></textarea>\n  <button type=\"submit\" name=\"btn btn-default\">Create New Blog</button>\n</div>\n";
 },"useData":true});
 
 },{"hbsfy/runtime":26}],6:[function(require,module,exports){
