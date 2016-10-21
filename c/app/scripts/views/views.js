@@ -9,6 +9,7 @@ var BlogListView = Backbone.View.extend({
     this.listenTo(this.collection, 'add', this.addBlogItem);
   },
   addBlogItem: function(blog){
+    console.log('Blog added');
     var newBlogItem = new BlogItemView({model: blog});
     this.$el.append(newBlogItem.render().el);
   }
