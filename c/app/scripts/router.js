@@ -14,7 +14,10 @@ var AppRouter = Backbone.Router.extend({
   index: function(){
     var newBlogList = new views.BlogListView({collection: this.collection});
     $('.blog-list-container').html(newBlogList.render().el);
-    this.collection.fetch();
+    this.collection.fetch().then(function(){
+      console.log(this.collection + 'This is');
+      // var defaultBlog = this.collection.get();
+    });
   },
   displayMain: function(id){
     var selectedBlog = this.collection.get(id);
