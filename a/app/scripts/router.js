@@ -11,9 +11,8 @@ var AppRouter = Backbone.Router.extend({
     this.collection = new models.BlogCollection();
   },
   getForm: function(){
-    console.log("GetForm function fired");
     var homeForm = new views.HomeFormView({collection: this.collection});
-  
+
     $('.app').html(homeForm.render().el);
   }
 });

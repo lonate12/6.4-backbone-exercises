@@ -11,7 +11,6 @@ var HomeFormView = Backbone.View.extend({
   },
   render: function(){
     this.$el.html(this.template());
-    // console.log('render function triggered');
     return this;
   },
   postBlogToServ: function(e){
