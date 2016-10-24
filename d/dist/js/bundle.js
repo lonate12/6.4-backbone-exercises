@@ -15,7 +15,7 @@ var BookmarkedURL = Backbone.Model.extend({
 
 var URLCollection = Backbone.Collection.extend({
   model: BookmarkedURL,
-  URL: 'https://tiny-lasagna-server.herokuapp.com/collections/rene-exercise-d/'
+  url: 'https://tiny-lasagna-server.herokuapp.com/collections/rene-exercise-d/'
 });
 
 module.exports = {
@@ -34,9 +34,13 @@ var AppRouter = Backbone.Router.extend({
   routes: {
     '': 'index'
   },
+  initialize: function(){
+    this.collection = new models.URLCollection();
+  },
   index: function(){
-    var newURLForm = new views.URLSubmissionForm();
-    $('.app').html(newURLForm.render().el);
+    var newURLForm = new views.URLSubmissionForm({collection: this.collection});
+
+    $('.url-form-container').html(newURLForm.render().el);
   }
 });
 
@@ -54,16 +58,37 @@ var URLSubmissionForm = Backbone.View.extend({
   tagName: 'form',
   className: 'url-form',
   template: newURLFormTemplate,
+  events: {
+    'submit': 'addURL'
+  },
   render: function(){
     this.$el.html(this.template());
 
     return this;
   },
+  addURL: function(e){
+    e.preventDefault();
+    var newURL = {
+      url: $('#url').val(),
+      tag: $('#tag').val(),
+    };
+
+    this.collection.create(newURL);
+
+    $('#url').val('');
+    $('#tag').val('');
+  }
+});
+
+var TagListItem = Backbone.View.extend({
+  tagName: 'li',
+  className: 'tag-item'
 });
 
 
 module.exports = {
-  URLSubmissionForm: URLSubmissionForm
+  URLSubmissionForm: URLSubmissionForm,
+  TagListItem: TagListItem
 };
 
 },{"../../templates/URL-form.hbs":5,"backbone":6,"jquery":27}],5:[function(require,module,exports){

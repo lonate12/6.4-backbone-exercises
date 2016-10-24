@@ -6,7 +6,7 @@ var BookmarkedURL = Backbone.Model.extend({
 
 var URLCollection = Backbone.Collection.extend({
   model: BookmarkedURL,
-  URL: 'https://tiny-lasagna-server.herokuapp.com/collections/rene-exercise-d/'
+  url: 'https://tiny-lasagna-server.herokuapp.com/collections/rene-exercise-d/'
 });
 
 module.exports = {

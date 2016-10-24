@@ -17,7 +17,6 @@ var AppRouter = Backbone.Router.extend({
     this.collection.fetch();
   },
   displayMain: function(id){
-    // console.log('Success.');
     var selectedBlog = this.collection.get(id);
     var activeBlog = new views.MainDisplayView({model: selectedBlog});
 
